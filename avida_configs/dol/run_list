@@ -1,0 +1,9 @@
+set description experiment: ts_repl
+set class_pref 150
+set mem_request 8
+set email_when final
+set email lalejini@msu.edu
+set walltime 4
+set beacon_priority y
+set config_dir /mnt/home/lalejini/ts_dol_repl/configs
+set dest_dir /mnt/home/lalejini/ts_dol_repl/data
