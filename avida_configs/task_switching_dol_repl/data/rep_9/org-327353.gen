@@ -1,0 +1,129 @@
+# Tue Feb 21 13:37:17 2017
+# Filename........: rep_9/org-327353.gen
+# Update Output...: N/A
+# Is Viable.......: 1
+# Repro Cycle Size: 0
+# Depth to Viable.: 0
+# 
+# Generation: 0
+# Merit...........: 97.000000
+# Gestation Time..: 383
+# Fitness.........: 0.253264
+# Errors..........: 4
+# Genome Size.....: 100
+# Copied Size.....: 100
+# Executed Size...: 97
+# Offspring.......: SELF
+# 
+# Tasks Performed:
+# not 1 (1.000000)
+# nand 3 (3.000000)
+# and 0 (0.000000)
+# orn 0 (0.000000)
+# or 0 (0.000000)
+# andn 0 (0.000000)
+# nor 0 (0.000000)
+# xor 0 (0.000000)
+# equ 0 (0.000000)
+
+
+h-alloc
+get-head
+set-flow
+nop-A
+mov-head
+nop-C
+shift-l
+swap
+IO
+push
+pop
+nop-C
+nand
+IO
+if-label
+set-flow
+dec
+donate-res-to-deme
+if-label
+h-alloc
+donate-res-to-deme
+h-alloc
+IO
+send-msg
+nand
+if-label
+send-msg
+get-opinion
+get-opinion
+get-opinion
+nop-C
+if-label
+rotate-right-one
+h-divide
+h-divide
+send-msg
+nop-C
+nop-C
+nop-C
+h-alloc
+swap
+nand
+send-msg
+donate-res-to-deme
+send-msg
+set-opinion
+nop-X
+h-divide
+if-less
+h-divide
+rotate-right-one
+nand
+donate-res-to-deme
+if-label
+IO
+h-divide
+send-msg
+dec
+nop-X
+get-head
+get-opinion
+get-head
+donate-res-to-deme
+shift-r
+shift-l
+nand
+nop-X
+get-cell-xy
+h-divide
+get-cell-xy
+h-search
+inc
+shift-l
+nop-X
+set-flow
+get-cell-xy
+h-copy
+if-less
+h-search
+get-cycles
+nop-C
+nop-A
+h-alloc
+get-opinion
+nop-C
+if-label
+donate-res-to-deme
+shift-l
+swap-stk
+get-cycles
+get-cell-xy
+h-search
+h-copy
+if-label
+nop-C
+nop-A
+h-divide
+mov-head
+nop-A
+nop-B

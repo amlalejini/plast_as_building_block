@@ -1,0 +1,129 @@
+# Tue Feb 21 13:37:16 2017
+# Filename........: rep_1/org-311339.gen
+# Update Output...: N/A
+# Is Viable.......: 1
+# Repro Cycle Size: 0
+# Depth to Viable.: 0
+# 
+# Generation: 0
+# Merit...........: 94.000000
+# Gestation Time..: 367
+# Fitness.........: 0.256131
+# Errors..........: 1
+# Genome Size.....: 100
+# Copied Size.....: 100
+# Executed Size...: 94
+# Offspring.......: SELF
+# 
+# Tasks Performed:
+# not 0 (0.000000)
+# nand 0 (0.000000)
+# and 0 (0.000000)
+# orn 1 (1.000000)
+# or 1 (1.000000)
+# andn 3 (3.000000)
+# nor 0 (0.000000)
+# xor 0 (0.000000)
+# equ 0 (0.000000)
+
+
+h-alloc
+h-search
+nop-C
+nop-A
+mov-head
+nop-C
+send-msg
+swap-stk
+IO
+push
+pop
+nop-C
+h-copy
+IO
+IO
+if-less
+if-label
+nop-B
+nand
+nop-C
+set-flow
+nop-C
+nand
+nop-C
+if-n-equ
+dec
+nop-A
+add
+sub
+h-copy
+push
+nop-C
+nop-C
+if-less
+shift-l
+nop-B
+donate-res-to-deme
+nand
+nop-C
+swap
+h-search
+if-label
+nand
+bcast1
+set-flow
+nop-C
+set-opinion
+nop-B
+get-head
+get-cell-xy
+get-opinion
+add
+nand
+pop
+nop-C
+send-msg
+nand
+nop-C
+nop-C
+donate-res-to-deme
+set-opinion
+shift-r
+send-msg
+donate-res-to-deme
+dec
+shift-r
+pop
+send-msg
+bcast1
+IO
+add
+send-msg
+get-cycles
+nop-C
+push
+IO
+set-opinion
+add
+shift-r
+if-less
+pop
+h-alloc
+get-head
+swap
+shift-r
+donate-res-to-deme
+rotate-right-one
+nop-X
+add
+nop-C
+nand
+h-search
+h-copy
+if-label
+nop-C
+nop-A
+h-divide
+mov-head
+nop-A
+nop-B

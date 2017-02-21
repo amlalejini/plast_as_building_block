@@ -1,0 +1,129 @@
+# Tue Feb 21 13:37:17 2017
+# Filename........: rep_6/org-659936.gen
+# Update Output...: N/A
+# Is Viable.......: 1
+# Repro Cycle Size: 0
+# Depth to Viable.: 0
+# 
+# Generation: 0
+# Merit...........: 96.000000
+# Gestation Time..: 379
+# Fitness.........: 0.253298
+# Errors..........: 5
+# Genome Size.....: 100
+# Copied Size.....: 100
+# Executed Size...: 96
+# Offspring.......: SELF
+# 
+# Tasks Performed:
+# not 1 (1.000000)
+# nand 0 (0.000000)
+# and 0 (0.000000)
+# orn 0 (0.000000)
+# or 0 (0.000000)
+# andn 0 (0.000000)
+# nor 0 (0.000000)
+# xor 0 (0.000000)
+# equ 0 (0.000000)
+
+
+h-alloc
+h-search
+nop-C
+nop-A
+mov-head
+nop-C
+retrieve-msg
+bcast1
+IO
+push
+pop
+nop-C
+nand
+nop-X
+IO
+nop-B
+get-opinion
+nop-C
+rotate-left-one
+nop-X
+bcast1
+h-alloc
+h-alloc
+nand
+nop-C
+set-opinion
+nop-C
+if-less
+if-label
+push
+nop-C
+swap-stk
+push
+shift-r
+dec
+push
+rotate-right-one
+swap
+swap-stk
+get-opinion
+h-search
+send-msg
+get-opinion
+nop-C
+set-opinion
+nop-A
+pop
+send-msg
+set-opinion
+nand
+get-opinion
+nop-C
+rotate-right-one
+donate-res-to-deme
+rotate-right-one
+swap
+send-msg
+if-n-equ
+send-msg
+nop-A
+nop-X
+get-head
+nop-C
+h-divide
+nop-C
+nop-C
+bcast1
+swap-stk
+h-alloc
+nop-C
+dec
+nand
+get-cycles
+h-alloc
+nop-C
+nop-C
+h-alloc
+nop-C
+swap
+swap-stk
+set-flow
+get-cycles
+h-search
+time
+donate-res-to-deme
+h-search
+get-head
+nop-B
+get-head
+h-search
+h-search
+h-search
+h-copy
+if-label
+nop-C
+nop-A
+h-divide
+mov-head
+nop-A
+nop-B

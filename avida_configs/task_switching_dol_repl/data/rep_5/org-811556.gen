@@ -1,0 +1,129 @@
+# Tue Feb 21 13:37:17 2017
+# Filename........: rep_5/org-811556.gen
+# Update Output...: N/A
+# Is Viable.......: 0
+# Repro Cycle Size: 0
+# Depth to Viable.: -1
+# 
+# Generation: 0
+# Merit...........: 100.000000
+# Gestation Time..: 0
+# Fitness.........: 0.000000
+# Errors..........: 0
+# Genome Size.....: 100
+# Copied Size.....: 100
+# Executed Size...: 100
+# Offspring.......: NONE
+# 
+# Tasks Performed:
+# not 0 (0.000000)
+# nand 0 (0.000000)
+# and 0 (0.000000)
+# orn 0 (0.000000)
+# or 0 (0.000000)
+# andn 0 (0.000000)
+# nor 0 (0.000000)
+# xor 0 (0.000000)
+# equ 0 (0.000000)
+
+
+h-alloc
+set-flow
+set-flow
+nop-A
+nand
+get-head
+dec
+get-opinion
+IO
+push
+pop
+nop-C
+nand
+IO
+rotate-left-one
+if-less
+mov-head
+nop-C
+if-n-equ
+donate-res-to-deme
+get-opinion
+nop-C
+inc
+mov-head
+nop-C
+get-opinion
+nop-C
+send-msg
+rotate-left-one
+if-label
+donate-res-to-deme
+nop-B
+set-opinion
+set-flow
+push
+bcast1
+send-msg
+rotate-right-one
+if-less
+push
+nand
+nop-C
+send-msg
+set-opinion
+h-divide
+if-less
+get-cell-xy
+inc
+add
+send-msg
+set-opinion
+shift-l
+if-n-equ
+set-flow
+rotate-right-one
+push
+get-opinion
+nop-A
+send-msg
+set-flow
+push
+nop-C
+if-n-equ
+get-cycles
+send-msg
+if-n-equ
+sub
+set-flow
+nop-C
+get-opinion
+nop-X
+rotate-right-one
+rotate-left-one
+if-n-equ
+send-msg
+jmp-head
+swap-stk
+h-alloc
+if-n-equ
+push
+push
+IO
+get-cell-xy
+inc
+push
+send-msg
+pop
+nop-C
+donate-res-to-deme
+if-less
+pop
+h-search
+h-copy
+if-label
+nop-C
+nop-A
+h-divide
+mov-head
+nop-A
+nop-B
