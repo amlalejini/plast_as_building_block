@@ -15,13 +15,59 @@ How does plasticity affect the evolution of more complex tasks?
 #### General Design
 To answer each of the above questions, digital organisms are evolved in a seed, or ancestral, environment. Organisms evolved under seed/ancestral environment conditions are then transferred to an experimental environment. See environment descriptions for descriptions of seed environments used.
 
+##### General Design Decision Notes
+  * Environmental change rate
+    - Selecting a single change rate that seems to produce the most examples of plasticity in exploratory studies.
+  * Mutational events
+    - Allowing for insertion mutations because maybe duplications are useful for the evolution of more complex regulation?
+
+
 ##### Design by question:
   1. What are the effects of existing regulation of multiple traits on the evolution of more complex regulation of those same traits?
+    * Ancestral Environments:
+      - NAND/NOT (2 env) with sensing
+        - NAND/NOT regulation is perfectly correlated when just 2 environments.
+      - NAND/NOT (2 env) without sensing
+      - NAND/NOT (static) with sensing (lower priority)
+      - NAND/NOT (static) without sensing
+    * Experimental Environment:
+      - NAND/NOT (4 env) with sensing overlaid on ancestral environmental conditions.
+    * Data collection:
+     - 
 
   2. What are the effects of existing regulation of multiple traits on the evolution of different and more complex, unregulated traits?
+    * Ancestral Environments:
+      - NAND/NOT (4 env) with sensing
+      - NAND/NOT (4 env) without sensing
+      - NAND/NOT (static) with sensing (lower priority)
+      - NAND/NOT (static) without sensing
+    * Experimental Environment:
+      - Full logic 9 (static) overlaid on ancestral environmental conditions.
+    * Data collection:
+     -
   3. What are the effects of existing regulation of multiple traits on the evolution of different and more complex, regulated traits?
-  4. What are the effects of existing regulation of multiple traits on the evolution of complex coordination, like division of labor?
+    * Ancestral Environments:
+      - NAND/NOT (4 env) with sensing
+      - NAND/NOT (4 env) without sensing
+      - NAND/NOT (static) with sensing (lower priority)
+      - NAND/NOT (static) without sensing
+    * Experimental Environments:
+      - Full logic 9 (logic 9 = logic 9 - ancestral) (4 env) overlaid on ancestral environment.
+      - Full logic 9 (random) overlaid on ancestral environment
+    * Data collection:
+     -
 
+  4. What are the effects of existing regulation of multiple traits on the evolution of complex coordination, like division of labor?
+    * Ancestral Environments:
+      - NAND/NOT (4 env) with sensing
+      - NAND/NOT (4 env) without sensing
+      - NAND/NOT (static) with sensing (lower priority)
+      - NAND/NOT (static) without sensing
+    * Experimental Environments:
+      - Division of labor due to task-switching costs.
+      - Division of labor due to mutually exclusive tasks. (lower priority)
+    * Data collection:
+      -
 
 ## Environments
 
