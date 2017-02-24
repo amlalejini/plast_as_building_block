@@ -1,6 +1,9 @@
 # Plasticity as an Evolutionary Building Block
 This repository contains avida configuration files and analysis scripts for experiments looking at the role plasticity plays in the evolution of complexity.
 
+## TODO:
+  * How should I split 6 logic functions into two groups?
+
 ## For ECAL 2017: Plasticity as a Building Block for Complexity
 ### Big question:
 How does plasticity affect the evolution of more complex tasks?
@@ -31,7 +34,7 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
       - NAND/NOT (static) with sensing (lower priority)
       - NAND/NOT (static) without sensing
     * Experimental Environment:
-      - NAND/NOT (4 env) with sensing overlaid on ancestral environmental conditions.
+      - NAND/NOT (4 env) with sensing.
     * Data collection:
      - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
      - Update of optimal phenotype evolution in experimental environment
@@ -77,6 +80,14 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
       - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
       - Division of labor measurements of final dominant colony at end of the experimental environment
 
+### Configuration Notes
+  * exp_configs -- EVENTS FILES
+    * ENV-A: NAND/NOT (4 env) + ANDN/OR/ORN/AND/XOR/NOR/EQU (static)
+    * ENV-B: NAND/NOT (static) + ANDN/OR/ORN/AND/XOR/NOR/EQU (static)
+    * ENV-C: NAND/NOT (4 env) + correlated ANDN/OR/ORN/AND/XOR/NOR + EQU (static)
+    * ENV-D: NAND/NOT (static) + changing ANDN/OR/ORN/AND/XOR/NOR + EQU (static)
+    * ENV-E: NAND/NOT (4 env) + randomly changing ANDN/OR/ORN/AND/XOR/NOR/EQU + EQU (static)
+    * ENV-F: NAND/NOT (static) + randomly changing ANDN/OR/ORN/AND/XOR/NOR/EQU + EQU (static)
 ## Environments
 
 ### Ancestral/Seed Environments:
