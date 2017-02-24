@@ -33,7 +33,9 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
     * Experimental Environment:
       - NAND/NOT (4 env) with sensing overlaid on ancestral environmental conditions.
     * Data collection:
-     - 
+     - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
+     - Update of optimal phenotype evolution in experimental environment
+     - Optimal phenotype at end of experimental environment
 
   2. What are the effects of existing regulation of multiple traits on the evolution of different and more complex, unregulated traits?
     * Ancestral Environments:
@@ -44,7 +46,10 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
     * Experimental Environment:
       - Full logic 9 (static) overlaid on ancestral environmental conditions.
     * Data collection:
-     -
+      - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
+      - Update of optimal phenotype evolution in experimental environment
+      - Optimal phenotype at end of experimental environment
+
   3. What are the effects of existing regulation of multiple traits on the evolution of different and more complex, regulated traits?
     * Ancestral Environments:
       - NAND/NOT (4 env) with sensing
@@ -55,7 +60,9 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
       - Full logic 9 (logic 9 = logic 9 - ancestral) (4 env) overlaid on ancestral environment.
       - Full logic 9 (random) overlaid on ancestral environment
     * Data collection:
-     -
+      - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
+      - Update of optimal phenotype evolution in experimental environment
+      - Optimal phenotype at end of experimental environment
 
   4. What are the effects of existing regulation of multiple traits on the evolution of complex coordination, like division of labor?
     * Ancestral Environments:
@@ -67,7 +74,8 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
       - Division of labor due to task-switching costs.
       - Division of labor due to mutually exclusive tasks. (lower priority)
     * Data collection:
-      -
+      - Rate of evolution of optimality with respect to ancestral environment (mark treatments w/optimal final dominant)
+      - Division of labor measurements of final dominant colony at end of the experimental environment
 
 ## Environments
 
