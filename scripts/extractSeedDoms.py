@@ -18,9 +18,13 @@ def main():
     configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
     analysis_cfgs_dir = os.path.join(configs_dir, "analysis")
     seed_configs_dir = os.path.join(configs_dir, "seed_configs")
+    ancestral_seed_bank_dir = os.path.join(exp_base_dir, "ancestral_seed_bank")
+
     start_rep = 1
     end_rep = 100
     final_update = 200000
+
+    mkdir_p(ancestral_seed_bank_dir)
 
     # Build avida commands from run list file.
     avida_args_by_treatment = {}
@@ -35,27 +39,30 @@ def main():
     print "Extracting seed dominants."
 
     # Build a temporary analysis file.
-    treatments = " ".join(avida_args_by_treatment.keys())
-    acfg_fpath = os.path.join(analysis_cfgs_dir, "extract_seed_doms.cfg")
-    temp_acfg_content = ""
-    with open(acfg_fpath, "r") as fp:
-        temp_acfg_content = fp.read()
-    temp_acfg_content = temp_acfg_content.replace("<start_replicate>", str(start_rep))
-    temp_acfg_content = temp_acfg_content.replace("<end_replicate>", str(end_rep))
-    temp_acfg_content = temp_acfg_content.replace("<final_update>", str(final_update))
-    temp_acfg_content = temp_acfg_content.replace("<base_experiment_directory>", seed_data_dir)
-    temp_acfg_content = temp_acfg_content.replace("<treatments>", treatments)
-
-    # Write out temp analysis file.
-    temp_acfg = os.path.join(seed_configs_dir, "temp_extract_seed_doms.cfg")
-    with open(temp_acfg, "w") as fp:
-        fp.write(temp_acfg_content)
-
-    # Clean up temp analysis file.
-    return_code = subprocess.call("rm temp_extract_seed_doms.cfg", shell = True, cwd = seed_configs_dir)
-
-
-
+    for treatment in avida_args_by_treatment:
+        print "Processing treatment: " + str(treatment)
+        acfg_fpath = os.path.join(analysis_cfgs_dir, "extract_seed_doms.cfg")
+        temp_acfg_content = ""
+        with open(acfg_fpath, "r") as fp:
+            temp_acfg_content = fp.read()
+        temp_acfg_content = temp_acfg_content.replace("<start_replicate>", str(start_rep))
+        temp_acfg_content = temp_acfg_content.replace("<end_replicate>", str(end_rep))
+        temp_acfg_content = temp_acfg_content.replace("<final_update>", str(final_update))
+        temp_acfg_content = temp_acfg_content.replace("<base_experiment_directory>", seed_data_dir)
+        temp_acfg_content = temp_acfg_content.replace("<treatments>", treatment)
+        # Write out temp analysis file.
+        temp_acfg = os.path.join(seed_configs_dir, "temp_extract_seed_doms.cfg")
+        with open(temp_acfg, "w") as fp:
+            fp.write(temp_acfg_content)
+        # Build analysis command
+        cmd = "./avida %s -a -set ANALYZE_FILE %s" % (avida_args_by_treatment[treatment], temp_acfg)
+        # Run avida analysis.
+        return_code = subprocess.call(cmd, shell = True, cwd = seed_configs_dir)
+        # Create .org file from generated .gen file.
+        #geno_fpath = os.path.join(seed_configs_dir, "archive", treatment )
+        # Clean up temp analysis file.
+        return_code = subprocess.call("rm temp_extract_seed_doms.cfg", shell = True, cwd = seed_configs_dir)
+        exit()
 
 if __name__ == "__main__":
     main()
