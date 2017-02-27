@@ -11,6 +11,7 @@ Manage the running of Avida's analyze mode given the settings specified in the g
 """
 
 import os, subprocess, sys
+from utilities.utilities import mkdir_p
 
 def main():
     exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
@@ -62,7 +63,7 @@ def main():
         #geno_fpath = os.path.join(seed_configs_dir, "archive", treatment )
         # Clean up temp analysis file.
         return_code = subprocess.call("rm temp_extract_seed_doms.cfg", shell = True, cwd = seed_configs_dir)
-        exit()
+    print "Done!"
 
 if __name__ == "__main__":
     main()
