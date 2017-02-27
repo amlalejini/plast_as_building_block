@@ -13,9 +13,9 @@ Manage the running of Avida's analyze mode given the settings specified in the g
 import os, subprocess, sys
 
 def main():
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
     seed_data_dir = os.path.join(exp_base_dir, "seed_data")
-    configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
+    configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     analysis_cfgs_dir = os.path.join(configs_dir, "analysis")
     seed_configs_dir = os.path.join(configs_dir, "seed_configs")
     ancestral_seed_bank_dir = os.path.join(exp_base_dir, "ancestral_seed_bank")
