@@ -2,7 +2,9 @@
 This repository contains avida configuration files and analysis scripts for experiments looking at the role plasticity plays in the evolution of complexity.
 
 ## TODO:
-  * How should I split 6 logic functions into two groups?
+  * [ ] How should I split 6 logic functions into two groups?
+  * [ ] Write script to create events files for:
+    * [ ] Q1 (1, 2, 3), [ ] Q2 (1, 2, 3), [ ] Q3 (1, 2, 3)
 
 ## For ECAL 2017: Plasticity as a Building Block for Complexity
 ### Big question:
