@@ -4,8 +4,9 @@ This repository contains avida configuration files and analysis scripts for expe
 ## TODO:
   * [ ] How should I split 6 logic functions into two groups?
   * [ ] Write script to create events files for:
-    * [ ] Q1 (1, 2, 3), [ ] Q2 (1, 2, 3), [ ] Q3 (1, 2, 3)
-
+    * [x] Q1 (1, 2, 3), [x] Q2 (1, 2, 3), [x] Q3 (1, 2, 3)
+    * [ ] Test script more extensively
+  * [ ] Write script to extract dominant organism from each seed env and copy it to a bank dir. 
 ## For ECAL 2017: Plasticity as a Building Block for Complexity
 ### Big question:
 How does plasticity affect the evolution of more complex tasks?
