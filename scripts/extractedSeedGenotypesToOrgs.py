@@ -15,10 +15,10 @@ def main():
         geno_content = ""
         with open(os.path.join(fpath, org), "r") as fp:
             geno_content = fp.read()
-        geno_content.split("\n\n")
+        geno_content = geno_content.split("\n\n")
         print geno_content
         exit()
 
 
-if __name __ == "__main__":
+if __name__ == "__main__":
     main()
