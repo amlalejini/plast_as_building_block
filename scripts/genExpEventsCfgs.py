@@ -93,10 +93,10 @@ def GenerateRandomlyChangingEnv(start = 50, stop = 200000, change_rate = 50):
 
 def main():
     # Some parameters:
-    seed_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/seed_data"
-    events_bank_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/event_bank"
-    seed_ancestor_bank_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/ancestral_org_bank"
-    configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs/exp_configs"
+    seed_dir = "/mnt/home/lalejini/Data/plast_as_building_block/seed_data"
+    events_bank_dir = "/mnt/home/lalejini/Data/plast_as_building_block/event_bank"
+    seed_analysis_dir = "/mnt/home/lalejini/Data/plast_as_building_block/seed_analysis"
+    configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/exp_configs"
     mkdir_p(events_bank_dir)
 
     # For each experimental environment 'treatment':
@@ -120,7 +120,8 @@ def main():
             with open(os.path.join(configs_dir, events_base_fname), "r") as fp:
                 for line in fp:
                     if "<ancestral_organism>" in line:
-                        ancestral_org = os.path.join(seed_ancestor_bank_dir, seed_rep, "dom.org")
+                        org_fname = [o for o in os.listdir(seed_analysis_dir, seed_rep, "final_dom") if ".gen" in o][0]
+                        ancestral_org = os.path.join(seed_analysis_dir, seed_rep, org_fname))
                         line = line.replace("<ancestral_organism>", ancestral_org)
                     elif "<random_changes>" in line and "Q4" in exp:
                         changing_env = GenerateRandomlyChangingEnv()
