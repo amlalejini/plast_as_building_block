@@ -29,19 +29,19 @@ def GenAllPossibleEnvs(traits = []):
     return envs
 
 def GenQ4T1Envs():
-    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "AND", "XOR", "NOR"])
+    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
     for e in range(0, len(envs)):
         envs[e]["EQU"] = 1
     return envs
 
 def GenQ4T2Envs():
-    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "AND", "XOR", "NOR"])
+    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
     for e in range(0, len(envs)):
         envs[e]["EQU"] = 1
     return envs
 
 def GenQ4T3Envs():
-    envs = GenAllPossibleEnvs(["AND", "ORN", "OR", "AND", "XOR", "NOR"])
+    envs = GenAllPossibleEnvs(["AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
     for e in range(0, len(envs)):
         envs[e]["EQU"] = 1
         envs[e]["NAND"] = 1
@@ -300,7 +300,13 @@ def main():
     #  1) Pull commands directly from command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
     #  2) Pull commands from a single replicate for that treatment (rep 1).
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
-    treatments = list({t.split("__")[0] for t in runs})
+    treatments = {t.split("__")[0] for t in runs}
+    # Filter out already done treatments:
+    treatments = list(treatments - set(["Q1T1", "Q1T2", "Q1T3",
+                                        "Q2T1", "Q2T2", "Q2T3",
+                                        "Q3T1", "Q3T2", "Q3T3"]))
+    print treatments
+    exit()
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     #print treatments
     for treatment in treatments:
