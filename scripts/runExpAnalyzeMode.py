@@ -306,7 +306,7 @@ def main():
                                         "Q2T1", "Q2T2", "Q2T3",
                                         "Q3T1", "Q3T2", "Q3T3"]))
     print treatments
-    exit()
+   # exit()
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     #print treatments
     for treatment in treatments:
