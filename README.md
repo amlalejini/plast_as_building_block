@@ -2,11 +2,13 @@
 This repository contains avida configuration files and analysis scripts for experiments looking at the role plasticity plays in the evolution of complexity.
 
 ## TODO:
-  * [ ] How should I split 6 logic functions into two groups?
-  * [ ] Write script to create events files for:
+  * [x] How should I split 6 logic functions into two groups?
+  * [x] Write script to create events files for:
     * [x] Q1 (1, 2, 3), [x] Q2 (1, 2, 3), [x] Q3 (1, 2, 3)
-    * [ ] Test script more extensively
-  * [ ] Write script to extract dominant organism from each seed env and copy it to a bank dir. 
+    * [x] Test script more extensively
+  * [x] Write script to extract dominant organism from each seed env and copy it to a bank dir.
+  * [ ] Run analyses for experimental Q4's
+  * [ ] Run analyses for experimental T1 reps: [47:]
 ## For ECAL 2017: Plasticity as a Building Block for Complexity
 ### Big question:
 How does plasticity affect the evolution of more complex tasks?
