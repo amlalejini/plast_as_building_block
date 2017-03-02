@@ -197,6 +197,16 @@ def EnvToString(env):
     """
     return "__".join(["%s_%d" % (trait, env[trait]) for trait in trait_ordering if trait in env])
 
+def GetDetArgs(treatment):
+    if "Q1" in treatment:
+        return " ".join(["id", "ancestor_dist", "parent_dist", "fitness_ratio", "comp_merit_ratio",
+                "parent_muts", "num_cpus", "fitness", "update_born", "depth", "viable",
+                "length", "copy_length", "exe_length", "gest_time", "sequence", "task.0", "task.1"])
+    else:
+        return " ".join(["id", "ancestor_dist", "parent_dist", "fitness_ratio", "comp_merit_ratio",
+                "parent_muts", "num_cpus", "fitness", "update_born", "depth", "viable",
+                "length", "copy_length", "exe_length", "gest_time", "sequence",
+                " ".join(["task.%d" % i for i in range(0, len(trait_ordering))])])
 
 def GenSeedTests(treatment):
     """
@@ -205,25 +215,51 @@ def GenSeedTests(treatment):
     tests = ""
     # For each environment, run tests.
     envs = treatment_info[treatment]["ancestral"]["environments"]
-    tests += "ECHO\"BEGIN: SEED TESTS\"\n"
+    tests += "ECHO \"BEGIN: SEED TESTS\"\n"
     tests += "###################\n# SEED ENV TESTS \n###################\n"
     tests += "SET_BATCH 0\n"
     for env in envs:
         env_str = EnvToString(env)
-        tests += "# ENV: %s\n" % str(env)
+        tests += "\n# ENV: %s\n" % str(env)
         # Setup this environment.
         tests += "\n".join(["SetReactionValue %s %d" % (t, env[t]) for t in env]) + "\n"
         # Run tests.
         tests += "RECALC \n"
-        tests += "DETAIL analysis/$t__rep_$i/seed/ENV___%s/seed_details.dat <args>\n" % (env_str, )
+        tests += "DETAIL analysis/$t__rep_$i/seed/ENV___%s/seed_details.dat %s\n" % (env_str, GetDetArgs(treatment))
         tests += "TRACE analysis/$t__rep_$i/seed/ENV___%s/trace/\n" % (env_str, )
         tests += "PRINT analysis/$t__rep_$i/seed/ENV___%s/ seed_print.gen\n" % (env_str, )
-    tests += "ECHO\"DONE: SEED TESTS\"\n"
-    print tests
+    tests += "ECHO \"DONE: SEED TESTS\"\n"
     return tests
 
-def GenFDomTests(treatment):
-    pass
+def GenExpTests(treatment):
+    """
+    Generate analysis file code for each treatment.
+    """
+    tests = ""
+    # For each environment, run tests.
+    envs = treatment_info[treatment]["experimental"]["environments"]
+    tests += "###################\n# EXPERIMENTAL ENV TESTS \n###################\n"
+    tests += "ECHO \"BEGIN: EXP TESTS\"\n"
+    for env in envs:
+        env_str = EnvToString(env)
+        tests += "\n# ENV: %s\n" % str(env)
+        # Setup this environment.
+        tests += "\n".join(["SetReactionValue %s %d" % (t, env[t]) for t in env]) + "\n"
+        # Run tests on FDOM.
+        tests += "SET_BATCH 1\n"
+        tests += "RECALC \n"
+        tests += "DETAIL analysis/$t__rep_$i/final_dominant/ENV___%s/fdom_details.dat %s\n" % (env_str, GetDetArgs(treatment))
+        tests += "TRACE analysis/$t__rep_$i/final_dominant/ENV___%s/trace/\n" % (env_str, )
+        tests += "PRINT analysis/$t__rep_$i/final_dominant/ENV___%s/ fdom_print.gen\n" % (env_str, )
+
+        # Run tests on FDOM.
+        tests += "SET_BATCH 2\n"
+        tests += "RECALC \n"
+        det_args = GetDetArgs(treatment)
+        tests += "DETAIL analysis/$t__rep_$i/final_dominant/ENV___%s/fdom_lineage_details.dat %s\n" % (env_str, GetDetArgs(treatment))
+
+    tests += "ECHO \"DONE: EXP TESTS\"\n"
+    return tests
 
 def main():
     """
@@ -235,32 +271,62 @@ def main():
     """
 
     # Settings
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    #cfgs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
+        cfgs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     data_dir = os.path.join(exp_base_dir, "data")
-    cfgs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
     analysis_cfgs_dir = os.path.join(cfgs_dir, "analysis")
     exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs")
 
-    start_rep = 1
-    end_rep = 100
     final_update = 200000
+    start_rep = 1
+    end_rep = 200
 
-    # Because avida commands for these runs are customized by replicate ID, pull commands directly from
-    #  command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
-    # For efficiency's sake, though, I'll set this up to only gen 1 temp avida analyze file for each
-    #  treatment to be reused per replicate.
+    # Build avida commands from run list file.
+    avida_args_by_treatment = {}
+    with open(os.path.join(exp_cfgs_dir, "run_list"), "r") as fp:
+        for line in fp:
+            if "./avida" in line:
+                mline = line.split(" ./avida ")
+                treatment = mline[0].split(" ")[-1].replace("__rep", "")
+                args = mline[1].strip()
+                args = args.replace("-s $seed", "")
+                args = args.replace("$seed", str(start_rep))
+                avida_args_by_treatment[treatment] = args
+    print avida_args_by_treatment
 
+    # Because avida commands for these runs are customized by replicate ID, I have several options:
+    #  1) Pull commands directly from command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
+    #  2) Pull commands from a single replicate for that treatment (rep 1).
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
     treatments = list({t.split("__")[0] for t in runs})
+    treatments = {t:[r for r in runs if t in r] for t in treatments}
+    print treatments
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
         # Generate analysis file.
-        GenSeedTests(treatment)
-        GenFDomTests(treatment)
-        #GenFDomLineageTests(treatment)
-
-
-
+        content = ""
+        with open(os.path.join(analysis_cfgs_dir, "exp_analysis.cfg"), "r") as fp:
+            content = fp.read()
+        content = content.replace("<start_replicate>", str(start_rep))
+        content = content.replace("<end_replicate>", str(end_rep))
+        content = content.replace("<final_update>", str(final_update))
+        content = content.replace("<base_experiment_directory>", data_dir)
+        content = content.replace("<treatments>", treatment)
+        content = content.replace("<seed_tests>", GenSeedTests(treatment))
+        content = content.replace("<exp_tests>", GenExpTests(treatment))
+        # write out temporary analysis file
+        temp_acfg = os.path.join(exp_cfgs_dir, "temp_exp_analysis.cfg")
+        with open(temp_acfg, "w") as fp:
+            fp.write(content)
+        # Build run command.
+        cmd = "./avida %s -a -set ANALYZE_FILE %s -set EVENT_FILE dummy_events.cfg" % (avida_args_by_treatment[treatment], temp_acfg)
+        # Run avida analysis.
+        return_code = subprocess.call(cmd, shell = True, cwd = exp_cfgs_dir)
+        # Clean up temporary analysis file.
+        return_code = subprocess.call("rm temp_exp_analysis.cfg", shell = True, cwd = exp_cfgs_dir)
+print "Done!"
 
 if __name__ == "__main__":
     main()
