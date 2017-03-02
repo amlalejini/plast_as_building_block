@@ -274,7 +274,7 @@ def main():
     #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
     #cfgs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
     exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
-        cfgs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
+    cfgs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     data_dir = os.path.join(exp_base_dir, "data")
     analysis_cfgs_dir = os.path.join(cfgs_dir, "analysis")
     exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs")
@@ -294,7 +294,7 @@ def main():
                 args = args.replace("-s $seed", "")
                 args = args.replace("$seed", str(start_rep))
                 avida_args_by_treatment[treatment] = args
-    print avida_args_by_treatment
+    #print avida_args_by_treatment
 
     # Because avida commands for these runs are customized by replicate ID, I have several options:
     #  1) Pull commands directly from command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
@@ -302,7 +302,7 @@ def main():
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
     treatments = list({t.split("__")[0] for t in runs})
     treatments = {t:[r for r in runs if t in r] for t in treatments}
-    print treatments
+    #print treatments
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
         # Generate analysis file.
