@@ -72,7 +72,7 @@ def main():
     treatment_set = {t.split("__")[0] for t in runs}
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
-    data_content = [["treatment", "rep_id", "seed_env_count", "seed_phenotype_score", "seed_max_phenotype_score",
+    data_content = [["treatment", "question", "rep_id", "seed_env_count", "seed_phenotype_score", "seed_max_phenotype_score",
                     "seed_norm_phenotype_score", "fdom_env_count", "fdom_phenotype_score",
                     "fdom_max_phenotype_score", "fdom_norm_phenotype_score", "fdom_equ"]]
     for treatment in treatments:
@@ -122,7 +122,8 @@ def main():
                 fdom_perf_equ_cnt += analysis["perf_equ"]
             # Aggregate data for this run.
             run_data = {"treatment": treatment,
-                        "rep_id": run.split("_")[-1],
+                        "question": treatment[:2],
+                        "rep_id": run,
                         "seed_env_count": len(seed_envs),
                         "seed_phenotype_score": seed_phen_score,
                         "seed_max_phenotype_score": seed_phen_mscore,
@@ -135,13 +136,15 @@ def main():
                     }
             # Order and append data to content list
             data_content.append([str(run_data[attr]) for attr in data_content[0]])
-            # print "    Seed env cnt: " + str(len(seed_envs))
-            # print "    Seed score: " + str(seed_phen_score)
-            # print "    Max seed score: " + str(seed_phen_mscore)
-            # print "    Fdom env cnt: " + str(len(fdom_envs))
-            # print "    Fdom score: " + str(fdom_phen_score)
-            # print "    Fdom max score: " + str(fdom_phen_mscore)
-            # print "    Fdom pef equ: " + str(fdom_perf_equ_cnt)
+            print "    Seed env cnt: " + str(len(seed_envs))
+            print "    Seed score: " + str(seed_phen_score)
+            print "    Max seed score: " + str(seed_phen_mscore)
+            print "    Seed norm score: " + str(NormalizePhenotypeScore(seed_phen_score, seed_phen_mscore))
+            print "    Fdom env cnt: " + str(len(fdom_envs))
+            print "    Fdom score: " + str(fdom_phen_score)
+            print "    Fdom max score: " + str(fdom_phen_mscore)
+            print "    Fdom norm score: " + str(NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore))
+            print "    Fdom pef equ: " + str(fdom_perf_equ_cnt)
     print data_content
     # Write out data content to file.
     with open("grungeback_does_science.data", "w") as fp:
