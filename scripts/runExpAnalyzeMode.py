@@ -304,7 +304,8 @@ def main():
     # Filter out already done treatments:
     treatments = list(treatments - set(["Q1T1", "Q1T2", "Q1T3",
                                         "Q2T1", "Q2T2", "Q2T3",
-                                        "Q3T1", "Q3T2", "Q3T3"]))
+                                        "Q3T1", "Q3T2", "Q3T3",
+                                        "Q4T2", "Q4T3"]))
 
     print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
