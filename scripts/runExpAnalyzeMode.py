@@ -280,8 +280,8 @@ def main():
     exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs")
 
     final_update = 200000
-    start_rep = 1
-    end_rep = 200
+    start_rep = 47 # Start at 47
+    end_rep = 100
 
     # Build avida commands from run list file.
     avida_args_by_treatment = {}
@@ -301,12 +301,8 @@ def main():
     #  2) Pull commands from a single replicate for that treatment (rep 1).
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
     treatments = {t.split("__")[0] for t in runs}
-    # Filter out already done treatments:
-    treatments = list(treatments - set(["Q1T1", "Q1T2", "Q1T3",
-                                        "Q2T1", "Q2T2", "Q2T3",
-                                        "Q3T1", "Q3T2", "Q3T3",
-                                        "Q4T2", "Q4T3"]))
-
+    # Only include particular treatments:
+    treatments = ["Q2T1", "Q3T1", "Q4T1", "Q4T2"]
     print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     #print treatments
