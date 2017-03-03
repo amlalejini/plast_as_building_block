@@ -63,7 +63,7 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
 
 def main():
     # Some relevant parameters.
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    exp_base_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/exp_configs/data"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
     skip_runs = ["Q2T1_46", "Q3T1_46", "Q4_T1_46"]
     # Get all relevant runs.
