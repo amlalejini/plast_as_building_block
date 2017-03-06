@@ -1,5 +1,6 @@
 set description experiment: plast_as_building_block
-set class_pref 150
+#set class_pref 150
+set feature intel16
 set mem_request 4
 set email_when final
 set email lalejini@msu.edu
