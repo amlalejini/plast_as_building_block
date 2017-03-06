@@ -19,7 +19,58 @@ exps = ["Q1T1","Q1T2","Q1T3",
         "Q4T1","Q4T2","Q4T3"]
 
 # Maps treatment -- events base file
-exps_mappings = {
+exps_mappings_iter_1 = {
+                "Q1T1": {
+                    "events_base": "events-BASE___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_2__cr_50__tasks_NAND_NOT__sensing_NAND_NOT"
+                },
+                "Q1T2": {
+                    "events_base": "events-BASE___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_2__cr_50__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q1T3": {
+                    "events_base": "events-BASE___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_1__cr_0__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q2T1": {
+                    "events_base": "events-BASE___ENV-A.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NAND_NOT"
+                },
+                "Q2T2": {
+                    "events_base": "events-BASE___ENV-A.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q2T3": {
+                    "events_base": "events-BASE___ENV-B.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_1__cr_0__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q3T1": {
+                    "events_base": "events-BASE___ENV-C.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NAND_NOT"
+                },
+                "Q3T2": {
+                    "events_base": "events-BASE___ENV-C.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q3T3": {
+                    "events_base": "events-BASE___ENV-D.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_1__cr_0__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q4T1": {
+                    "events_base": "events-BASE___ENV-E.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NAND_NOT"
+                },
+                "Q4T2": {
+                    "events_base": "events-BASE___ENV-E.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NONE"
+                },
+                "Q4T3": {
+                    "events_base": "events-BASE___ENV-F.cfg",
+                    "ancestral_treatment": "ntasks_2__envs_1__cr_0__tasks_NAND_NOT__sensing_NONE"
+                }
+}
+
+exps_mappings_iter_2 = {
                 "Q1T1": {
                     "events_base": "events-BASE___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg",
                     "ancestral_treatment": "ntasks_2__envs_2__cr_50__tasks_NAND_NOT__sensing_NAND_NOT"
