@@ -7,7 +7,6 @@ Manage the running of Avida's analyze mode given the settings specified in the g
 # 2) run avida analysis mode with temporary file.
 # 3) clean up temporary file
 # 4) create a .org file from the .gen file.
-# 5) put .org file in ancestral seed bank
 """
 
 import os, subprocess, sys
@@ -15,17 +14,14 @@ from utilities.utilities import mkdir_p
 
 def main():
     exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
-    seed_data_dir = os.path.join(exp_base_dir, "seed_data")
+    seed_data_dir = os.path.join(exp_base_dir, "seed_data_iter_2")
     configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     analysis_cfgs_dir = os.path.join(configs_dir, "analysis")
-    seed_configs_dir = os.path.join(configs_dir, "seed_configs")
-    ancestral_seed_bank_dir = os.path.join(exp_base_dir, "ancestral_seed_bank")
+    seed_configs_dir = os.path.join(configs_dir, "seed_configs_iter_2")
 
     start_rep = 1
     end_rep = 100
     final_update = 200000
-
-    mkdir_p(ancestral_seed_bank_dir)
 
     # Build avida commands from run list file.
     avida_args_by_treatment = {}
@@ -33,7 +29,7 @@ def main():
         for line in fp:
             if "./avida" in line:
                 mline = line.split(" ./avida ")
-                treatment = mline[0].split(" ")[-1].replace("__rep_", "")
+                treatment = mline[0].split(" ")[-1].replace("__rep", "")
                 args = mline[1].strip()
                 avida_args_by_treatment[treatment] = args.replace("-s $seed", "")
     print avida_args_by_treatment
