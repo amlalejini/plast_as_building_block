@@ -92,11 +92,12 @@ def GenerateRandomlyChangingEnv(start = 50, stop = 200000, change_rate = 50):
 def main():
     # Some parameters:
 
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
     events_bank_dir = os.path.join(exp_base_dir, "event_bank_iter_2")
     seed_analysis_dir = os.path.join(exp_base_dir, "seed_analysis_iter_2")
-    #configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/exp_configs_iter_2"
-    configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs/exp_configs_iter_2"
+    configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/exp_configs_iter_2"
+    #configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs/exp_configs_iter_2"
     mkdir_p(events_bank_dir)
 
     # For each experimental environment 'treatment':
