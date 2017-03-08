@@ -253,12 +253,12 @@ def main():
     #cfgs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
     exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
     cfgs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
-    data_dir = os.path.join(exp_base_dir, "data")
+    data_dir = os.path.join(exp_base_dir, "exp_data_iter_2")
     analysis_cfgs_dir = os.path.join(cfgs_dir, "analysis")
-    exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs")
+    exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs_iter_2")
 
     final_update = 200000
-    start_rep = 47 # Start at 47
+    start_rep = 1 # Start at 47
     end_rep = 100
 
     # Build avida commands from run list file.
