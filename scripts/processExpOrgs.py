@@ -7,8 +7,6 @@ This script processes output of exp_analysis.cfg (Avida analyze mode).
 * For exp environments:
     * final dominant
         * Phenotype score, max phenotype score, env count, equ count
-    * final dominant lineage:
-        * Phenotype score sequence, phenotype update sequence, max phenotype score, env count, equ count
 """
 
 import os
@@ -41,9 +39,6 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
     """
     max_phen_score = len(env_details) - len(skip_traits)
     phenotype_score = 0
-    perf_equ = 0
-    if trait_map["EQU"].lower() in org_details:
-        perf_equ = 1 if org_details[trait_map["EQU"].lower()] == "1" else 0
     for trait in env_details:
         if trait in skip_traits: continue
         trait_name = trait_map[trait].lower()
@@ -59,13 +54,12 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
         else:
             print "Unexpected expression/environment case!"
             exit(-1)
-    return {"max_score": max_phen_score, "score": phenotype_score, "perf_equ": perf_equ}
+    return {"max_score": max_phen_score, "score": phenotype_score}
 
 def main():
     # Some relevant parameters.
     exp_base_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/exp_configs/data"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
-    skip_runs = ["Q2T1_46", "Q3T1_46", "Q4_T1_46"]
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
@@ -107,7 +101,6 @@ def main():
             fdom_envs = [e for e in os.listdir(fdom_dir) if "ENV___" in e] # Extract fdom environments.
             fdom_phen_score = 0
             fdom_phen_mscore = 0
-            fdom_perf_equ_cnt = 0
             for env in fdom_envs:
                 env_dir = os.path.join(fdom_dir, env)
                 # 1) Extract environment characteristics.
@@ -115,11 +108,9 @@ def main():
                 # 2) Extract fdom organism details.
                 fdom_dets = ParseDetailFile(os.path.join(env_dir, "fdom_details.dat"))[0]
                 # 3) Analyze fdom organism in the environment.
-                skip_traits = [] if "Q1" in treatment else ["NAND", "NOT"]
-                analysis = AnalyzeOrg(fdom_dets, env_dets, skip_traits)
+                analysis = AnalyzeOrg(fdom_dets, env_dets)
                 fdom_phen_mscore += analysis["max_score"]
                 fdom_phen_score += analysis["score"]
-                fdom_perf_equ_cnt += analysis["perf_equ"]
             # Aggregate data for this run.
             run_data = {"treatment": treatment,
                         "question": treatment[:2],
@@ -132,7 +123,6 @@ def main():
                         "fdom_phenotype_score": fdom_phen_score,
                         "fdom_max_phenotype_score": fdom_phen_mscore,
                         "fdom_norm_phenotype_score": NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore),
-                        "fdom_equ": fdom_perf_equ_cnt
                     }
             # Order and append data to content list
             data_content.append([str(run_data[attr]) for attr in data_content[0]])
@@ -144,7 +134,6 @@ def main():
             print "    Fdom score: " + str(fdom_phen_score)
             print "    Fdom max score: " + str(fdom_phen_mscore)
             print "    Fdom norm score: " + str(NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore))
-            print "    Fdom pef equ: " + str(fdom_perf_equ_cnt)
     print data_content
     # Write out data content to file.
     with open("grungeback_does_science.data", "w") as fp:
