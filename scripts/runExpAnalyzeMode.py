@@ -28,28 +28,12 @@ def GenAllPossibleEnvs(traits = []):
         envs = new_envs
     return envs
 
-def GenQ4T1Envs():
-    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
-    for e in range(0, len(envs)):
-        envs[e]["EQU"] = 1
-    return envs
+def GenQ4Envs():
+    return GenAllPossibleEnvs(["AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
 
-def GenQ4T2Envs():
-    envs = GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
-    for e in range(0, len(envs)):
-        envs[e]["EQU"] = 1
-    return envs
-
-def GenQ4T3Envs():
-    envs = GenAllPossibleEnvs(["AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
-    for e in range(0, len(envs)):
-        envs[e]["EQU"] = 1
-        envs[e]["NAND"] = 1
-        envs[e]["NOT"] = 1
-    return envs
 
 # impose an arbitray ordering on traits (for consistancy purposes)
-trait_ordering = ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
+trait_ordering = ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
 
 treatment_info = {
     "Q1T1": {
@@ -96,10 +80,7 @@ treatment_info = {
                              {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": -1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": 1, "NOT": -1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": -1, "NOT": -1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1}]
         }
     },
     "Q2T2": {
@@ -110,10 +91,7 @@ treatment_info = {
                              {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                             {"NAND": -1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                             {"NAND": 1, "NOT": -1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                             {"NAND": -1, "NOT": -1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1}]
         }
     },
     "Q2T3": {
@@ -121,7 +99,7 @@ treatment_info = {
             "environments": [{"NAND": 1, "NOT": 1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1}]
         }
     },
 
@@ -133,10 +111,10 @@ treatment_info = {
                              {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "NOT": 1, "ORN": 1, "OR": 1, "NOR": 1, "EQU": 1},
-                              {"NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "NOT": -1, "ORN": -1, "OR": -1, "NOR": -1, "EQU": 1},
-                              {"NAND": -1, "NOT": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
+                              {"AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
+                              {"AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
+                              {"AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}]
         }
     },
     "Q3T2": {
@@ -147,10 +125,10 @@ treatment_info = {
                              {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "NOT": 1, "ORN": 1, "OR": 1, "NOR": 1, "EQU": 1},
-                              {"NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "NOT": -1, "ORN": -1, "OR": -1, "NOR": -1, "EQU": 1},
-                              {"NAND": -1, "NOT": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
+                              {"AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
+                              {"AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
+                              {"AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}]
         }
     },
     "Q3T3": {
@@ -158,10 +136,10 @@ treatment_info = {
             "environments": [{"NAND": 1, "NOT": 1}]
         },
         "experimental": {
-            "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1, "EQU": 1},
-                              {"NAND": 1, "AND": -1, "ANDN": -1, "XOR": -1, "NOT": 1, "ORN": 1, "OR": 1, "NOR": 1, "EQU": 1},
-                              {"NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "NOT": 1, "ORN": -1, "OR": -1, "NOR": -1, "EQU": 1},
-                              {"NAND": 1, "NOT": 1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1, "EQU": 1}]
+            "environments": [{"AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
+                              {"AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
+                              {"AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
+                              {"AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}]
         }
     },
 
@@ -170,7 +148,7 @@ treatment_info = {
             "environments": [{"NAND": 1, "NOT": 1}, {"NAND": -1, "NOT": 1}, {"NAND": 1, "NOT": -1}, {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": GenQ4T1Envs()
+            "environments": GenQ4Envs()
         }
     },
     "Q4T2": {
@@ -178,7 +156,7 @@ treatment_info = {
             "environments": [{"NAND": 1, "NOT": 1}, {"NAND": -1, "NOT": 1}, {"NAND": 1, "NOT": -1}, {"NAND": -1, "NOT": -1}]
         },
         "experimental": {
-            "environments": GenQ4T2Envs()
+            "environments": GenQ4Envs()
         }
     },
     "Q4T3": {
@@ -186,7 +164,7 @@ treatment_info = {
             "environments": [{"NAND": 1, "NOT": 1}]
         },
         "experimental": {
-            "environments": GenQ4T3Envs()
+            "environments": GenQ4Envs()
         }
     }
 }
@@ -302,8 +280,8 @@ def main():
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
     treatments = {t.split("__")[0] for t in runs}
     # Only include particular treatments:
-    treatments = ["Q2T1", "Q3T1", "Q4T1", "Q4T2"]
-    print treatments
+    # treatments = ["Q2T1", "Q3T1", "Q4T1", "Q4T2"]
+    # print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     #print treatments
     for treatment in treatments:

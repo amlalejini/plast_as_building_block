@@ -11,11 +11,14 @@ This repository contains avida configuration files and analysis scripts for expe
     * [x] Run analyses for experimental Q4's
     * [ ] Run analyses for experimental (Q2,3,4) T1 reps: [47:] + Q4T2
     * [ ] Why is Q[2,3,4]T1 replicate 46 going extinct? Explore this further.
-    * [ ] Write script to pull out data for following questions:
   * ITERATION 2
-    * [ ] Generate events files
-    * [ ] Collect seed data
-    * [ ] Run experimental environments
+    * [x] Generate events files
+    * [x] Collect seed data
+    * [x] Run experimental environments
+    * [ ] Avida analysis (runExpAnalysisMode.py) on exp data
+    * [ ] processExpOrgs.py on exp data
+    * [ ] Visualize scores by treatment
+    * [ ] write script to pull score over time
 ## For ECAL 2017: Plasticity as a Building Block for Complexity
 ### Big question:
 How does plasticity affect the evolution of more complex tasks?
