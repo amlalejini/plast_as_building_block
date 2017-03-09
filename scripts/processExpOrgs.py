@@ -58,8 +58,9 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
 
 def main():
     # Some relevant parameters.
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
-    evorgs_dir = os.path.join(exp_base_dir, "analysis")
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
+    evorgs_dir = os.path.join(exp_base_dir, "exp_analysis_iter_2")
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
@@ -68,7 +69,7 @@ def main():
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
     data_content = [["treatment", "question", "rep_id", "seed_env_count", "seed_phenotype_score", "seed_max_phenotype_score",
                     "seed_norm_phenotype_score", "fdom_env_count", "fdom_phenotype_score",
-                    "fdom_max_phenotype_score", "fdom_norm_phenotype_score", "fdom_equ"]]
+                    "fdom_max_phenotype_score", "fdom_norm_phenotype_score"]]
     for treatment in treatments:
         print "Processing treatment: %s" % treatment
         for run in treatments[treatment]:
@@ -136,7 +137,7 @@ def main():
             print "    Fdom norm score: " + str(NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore))
     print data_content
     # Write out data content to file.
-    with open("grungeback_does_science.data", "w") as fp:
+    with open("iter2_fdom_200k.data", "w") as fp:
         fp.write("\n".join([",".join(line) for line in data_content]))
 
 if __name__ == "__main__":
