@@ -74,7 +74,7 @@ def main():
         print "Processing treatment: %s" % treatment
         for run in treatments[treatment]:
             print "  Processing run: %s" % run
-            if run in skip_runs: continue
+            #if run in skip_runs: continue
             run_dir = os.path.join(evorgs_dir, run)
             seed_dir = os.path.join(run_dir, "seed")
             fdom_dir = os.path.join(run_dir, "final_dominant")

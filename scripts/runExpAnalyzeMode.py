@@ -258,7 +258,7 @@ def main():
     exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs_iter_2")
 
     final_update = 200000
-    start_rep = 1 # Start at 47
+    start_rep = 77
     end_rep = 100
 
     # Build avida commands from run list file.
@@ -280,7 +280,7 @@ def main():
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
     treatments = {t.split("__")[0] for t in runs}
     # Only include particular treatments:
-    # treatments = ["Q2T1", "Q3T1", "Q4T1", "Q4T2"]
+    treatments = ["Q2T1", "Q3T1", "Q4T1"]
     # print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     #print treatments
