@@ -61,6 +61,7 @@ def main():
     #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
     exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
     evorgs_dir = os.path.join(exp_base_dir, "exp_analysis_iter_2")
+    #evorgs_dir = os.path.join(exp_base_dir, "iter_1", "analysis_iter_1")
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
@@ -109,6 +110,7 @@ def main():
                 # 2) Extract fdom organism details.
                 fdom_dets = ParseDetailFile(os.path.join(env_dir, "fdom_details.dat"))[0]
                 # 3) Analyze fdom organism in the environment.
+                #skip_traits = ["NAND", "NOT", "EQU"] if not "Q1" in treatment else []
                 analysis = AnalyzeOrg(fdom_dets, env_dets)
                 fdom_phen_mscore += analysis["max_score"]
                 fdom_phen_score += analysis["score"]
