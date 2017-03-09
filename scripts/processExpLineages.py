@@ -64,12 +64,14 @@ def GetEnvIndAttr(attr_key, org_by_env):
 
 def main():
     # Some relevant parameters.
-    exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/iter_1"
-    evorgs_dir = os.path.join(exp_base_dir, "exp_analysis")
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/iter_1"
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
+    evorgs_dir = os.path.join(exp_base_dir, "exp_analysis_iter_2")
+    lin_ts_fname = "lineage_score_ts.csv"
     final_update = 200000
     # Score time series data
-    score_ts_content = ",".join(["update", "treatment", "rep", "score"]) + "\n"
-    with open("garbo.csv", "w") as fp:
+    score_ts_content = ",".join(["update", "treatment", "question", "rep", "score"]) + "\n"
+    with open(lin_ts_fname, "w") as fp:
         fp.write(score_ts_content)
     score_ts_content = ""
     # Get all relevant runs.
@@ -78,7 +80,7 @@ def main():
     treatment_set = {t.split("__")[0] for t in runs}
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
-    skip = ["Q4T1", "Q4T2"]
+    skip = ["Q1T1", "Q1T2", "Q1T3"]
     for treatment in treatments:
         if treatment in skip: continue
         print "Processing treatment: %s" % treatment
@@ -132,7 +134,7 @@ def main():
                 if start_update == -1: start_update = 0
 
                 # * Duration in updates (next start - this start) or (final update - this start)
-                next_start_update = int(GetEnvIndAttr("update born", lin_dets[i + 1])) if i + 1 < lin_len else final_update
+                next_start_update = int(GetEnvIndAttr("update born", lin_dets[i + 1])) if i + 1 < lin_len else final_update + 1
                 duration_update = next_start_update - start_update
 
                 # Record relevant values.
@@ -141,10 +143,14 @@ def main():
                 full_duration_updates[i] = duration_update
                 max_score.add(org_phen_score_max)
 
+
+            sample_range = final_update
+
             # Expand scores (1 per upate)
             score_time_series = [-1 for u in range(0, final_update + 1)]
             for k in range(0, len(full_score_seq)):
                 start = full_start_updates[k]
+                if start > sample_range: break
                 dur = full_duration_updates[k]
                 score = full_score_seq[k]
                 for j in range(start, start + dur):
@@ -152,11 +158,19 @@ def main():
             assert(len(max_score) == 1)
             max_score = list(max_score)[0]
 
-            # Output score time series as a long-form (tidy) csv
-            for t in range(0, len(score_time_series)):
-                score_ts_content += ",".join([str(t), treatment, run, str(score_time_series[t])]) + "\n"
+            # Clean up some memory
+            full_score_seq = None
+            full_start_updates = None
+            full_duration_updates = None
+
+            # Sample rate:
+            samp_rate = 50
+            #sampled_score_ts = {s:score_time_series[s] for s in range(0, final_update + 1, samp_rate) if s < len(score_time_series)}
+            for t in range(0, sample_range, samp_rate):
+                score_ts_content += ",".join([str(t), treatment, treatment[:2], run, str(score_time_series[t])]) + "\n"
+            score_time_series = None
             # Output content so far.
-            with open("garbo.csv", "a") as fp:
+            with open(lin_ts_fname, "a") as fp:
                 fp.write(score_ts_content)
             score_ts_content = ""
 
