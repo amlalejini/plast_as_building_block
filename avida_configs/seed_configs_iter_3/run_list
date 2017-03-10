@@ -1,0 +1,25 @@
+set description experiment: plast_as_building_block
+set feature intel16
+set mem_request 4
+set email_when final
+set email lalejini@msu.edu
+set walltime 4
+set beacon_priority y
+set config_dir /mnt/home/lalejini/Data/plast_as_building_block/iter_3/seed_configs
+set dest_dir /mnt/home/lalejini/Data/plast_as_building_block/iter_3/seed_data
+
+## Seed environment runs.
+# NAND/NOT (2 env) with sensing
+#1..100 ntasks_2__envs_2__cr_50__tasks_NAND_NOT__sensing_NAND_NOT__rep ./avida -c avida___sensors_NAND_NOT.cfg -s $seed -set EVENT_FILE events___ntasks_2__envs_2__cr_50__tasks_NAND_NOT.cfg -set ENVIRONMENT_FILE environment___ntasks_2__tasks_NAND_NOT.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.025 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+# NAND/NOT (2 env) without sensing
+#1..100 ntasks_2__envs_2__cr_50__tasks_NAND_NOT__sensing_NONE__rep ./avida -c avida___no_sensors.cfg -s $seed -set EVENT_FILE events___ntasks_2__envs_2__cr_50__tasks_NAND_NOT.cfg -set ENVIRONMENT_FILE environment___ntasks_2__tasks_NAND_NOT.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.025 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+# NAND/NOT (static) without sensing
+1..50 ntasks_2__envs_1__cr_0__tasks_NAND_NOT__sensing_NONE__rep ./avida -c avida___no_sensors.cfg -s $seed -set EVENT_FILE events___ntasks_2__envs_1__cr_0__tasks_NAND_NOT.cfg -set ENVIRONMENT_FILE environment___ntasks_2__tasks_NAND_NOT.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.025 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+# NAND/NOT (4 env) with sensing
+1..50 ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NAND_NOT__rep ./avida -c avida___sensors_NAND_NOT.cfg -s $seed -set EVENT_FILE events___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg -set ENVIRONMENT_FILE environment___ntasks_2__tasks_NAND_NOT.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.025 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+# NAND/NOT (4 env) without sensing
+1..50 ntasks_2__envs_4__cr_50__tasks_NAND_NOT__sensing_NONE__rep ./avida -c avida___no_sensors.cfg -s $seed -set EVENT_FILE events___ntasks_2__envs_4__cr_50__tasks_NAND_NOT.cfg -set ENVIRONMENT_FILE environment___ntasks_2__tasks_NAND_NOT.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.025 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
