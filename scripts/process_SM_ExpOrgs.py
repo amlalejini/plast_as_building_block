@@ -55,10 +55,8 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
 
 def main():
     # Some relevant parameters.
-    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
-    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
-    evorgs_dir = os.path.join(exp_base_dir, "exp_analysis_iter_2")
-    #evorgs_dir = os.path.join(exp_base_dir, "iter_1", "analysis_iter_1")
+    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts"
+    evorgs_dir = os.path.join(exp_base_dir, "analysis")
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
