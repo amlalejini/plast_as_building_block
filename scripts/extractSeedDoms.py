@@ -13,14 +13,14 @@ import os, subprocess, sys
 from utilities.utilities import mkdir_p
 
 def main():
-    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block"
-    seed_data_dir = os.path.join(exp_base_dir, "seed_data_iter_2")
+    exp_base_dir = "/mnt/home/lalejini/Data/plast_as_building_block/iter_3"
+    seed_data_dir = os.path.join(exp_base_dir, "seed_data")
     configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     analysis_cfgs_dir = os.path.join(configs_dir, "analysis")
-    seed_configs_dir = os.path.join(configs_dir, "seed_configs_iter_2")
+    seed_configs_dir = os.path.join(configs_dir, "seed_configs")
 
     start_rep = 1
-    end_rep = 100
+    end_rep = 50
     final_update = 200000
 
     # Build avida commands from run list file.
