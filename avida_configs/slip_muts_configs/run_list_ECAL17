@@ -1,0 +1,61 @@
+set description experiment: slip_muts
+set feature intel16
+set mem_request 4
+set email_when final
+set email lalejini@msu.edu
+set walltime 4
+set beacon_priority y
+set config_dir /mnt/home/lalejini/Data/slip_muts/iter_2/configs
+set dest_dir /mnt/home/lalejini/Data/slip_muts/iter_2/data
+
+# Fill mode reference
+# 0 = Duplication
+# 1 = nop-X
+# 2 = Random
+# 3 = scrambled
+# 4 = nop-C
+
+# Questions:
+# * Should I set a min genome size?
+
+################
+# Effects of Slip Mutations on evolution of complex traits (LOGIC 9, static)?
+####
+# Slip -- Scrambled
+1..100 Q1__Slip_SCRAM__rep ./avida -c avida___sensors_NONE.cfg -s $seed -set EVENT_FILE events___CONST_LOGIC9.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 3 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Random
+1..100 Q1__Slip_RAND__rep ./avida -c avida___sensors_NONE.cfg -s $seed -set EVENT_FILE events___CONST_LOGIC9.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 2 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- nop-x
+1..100 Q1__Slip_NOP__rep ./avida -c avida___sensors_NONE.cfg -s $seed -set EVENT_FILE events___CONST_LOGIC9.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 1 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Duplications - PROB 0.05
+1..100 Q1__Slip_DUP__rep ./avida -c avida___sensors_NONE.cfg -s $seed -set EVENT_FILE events___CONST_LOGIC9.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# No slip -- PROB 0.0
+1..100 Q1__Slip_NONE__rep ./avida -c avida___sensors_NONE.cfg -s $seed -set EVENT_FILE events___CONST_LOGIC9.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+################
+# Effects of Slip Mutations on evolution of regulation (4 traits -- randomly changing)?
+####
+# Slip -- Scrambled
+1..100 Q2__Slip_SCRAM__rep ./avida -c avida___sensors_LOGIC4.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q2__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_4__tasks_LOGIC4.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 3 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Random
+1..100 Q2__Slip_RAND__rep ./avida -c avida___sensors_LOGIC4.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q2__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_4__tasks_LOGIC4.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 2 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- nop-x
+1..100 Q2__Slip_NOP__rep ./avida -c avida___sensors_LOGIC4.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q2__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_4__tasks_LOGIC4.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 1 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Duplications - PROB 0.05
+1..100 Q2__Slip_DUP__rep ./avida -c avida___sensors_LOGIC4.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q2__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_4__tasks_LOGIC4.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# No slip -- PROB 0.0
+1..100 Q2__Slip_NONE__rep ./avida -c avida___sensors_LOGIC4.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q2__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_4__tasks_LOGIC4.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+
+################
+# Effects of Slip Mutations on evolution of regulation (9 traits -- randomly changing)?
+####
+# Slip -- Scrambled
+1..100 Q3__Slip_SCRAM__rep ./avida -c avida___sensors_LOGIC9.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q3__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 3 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Random
+1..100 Q3__Slip_RAND__rep ./avida -c avida___sensors_LOGIC9.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q3__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 2 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- nop-x
+1..100 Q3__Slip_NOP__rep ./avida -c avida___sensors_LOGIC9.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q3__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 1 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# Slip -- Duplications - PROB 0.05
+1..100 Q3__Slip_DUP__rep ./avida -c avida___sensors_LOGIC9.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q3__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025
+# No slip -- PROB 0.0
+1..100 Q3__Slip_NONE__rep ./avida -c avida___sensors_LOGIC9.cfg -s $seed -set EVENT_FILE /mnt/home/lalejini/Data/slip_muts/iter_2/event_bank/events___Q3__rep_$seed.cfg -set ENVIRONMENT_FILE environment___ntasks_9__tasks_LOGIC9.cfg -set BIRTH_METHOD 4 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set MIN_GENOME_SIZE 100 -set COPY_MUT_PROB 0.0025

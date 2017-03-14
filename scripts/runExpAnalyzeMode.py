@@ -258,8 +258,8 @@ def main():
     exp_cfgs_dir = os.path.join(cfgs_dir, "exp_configs_iter_2")
 
     final_update = 200000
-    start_rep = 78
-    end_rep = 100
+    start_rep = 1
+    end_rep = 50
 
     # Build avida commands from run list file.
     avida_args_by_treatment = {}
