@@ -29,74 +29,29 @@ def GenAllPossibleEnvs(traits = []):
     return envs
 
 def GenQ3Envs():
-    return GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR"])
+    return GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN", "OR", "ANDN", "XOR", "NOR", "EQU"])
 
+def GenQ2Envs():
+    return GenAllPossibleEnvs(["NAND", "NOT", "AND", "ORN"])
 
 # impose an arbitray ordering on traits (for consistancy purposes)
 trait_ordering = ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
 
 treatment_info = {
-    "Q1T0": {
+    "Q1": {
         "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN": 1, "NOR": 1, "XOR": 1, "EQU": 1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
+        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"],
+        "final_update": 200000
     },
-    "Q1T1": {
-        "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN": 1, "NOR": 1, "XOR": 1, "EQU": 1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
+    "Q2": {
+        "environments": GenQ2Envs(),
+        "traits": ["NOT", "NAND", "AND", "ORN"],
+        "final_update": 200000
     },
-    "Q1T2": {
-        "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN": 1, "NOR": 1, "XOR": 1, "EQU": 1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
-    },
-    "Q1T3": {
-        "environments": [{"NAND": 1, "NOT": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN": 1, "NOR": 1, "XOR": 1, "EQU": 1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"]
-    },
-
-    "Q2T0": {
-        "environments": [{"NOT": 1, "NAND": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
-                          {"NOT": 1, "NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
-                          {"NOT": -1, "NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
-                          {"NOT": -1, "NAND": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q2T1": {
-        "environments": [{"NOT": 1, "NAND": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
-                          {"NOT": 1, "NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
-                          {"NOT": -1, "NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
-                          {"NOT": -1, "NAND": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q2T2": {
-        "environments": [{"NOT": 1, "NAND": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
-                          {"NOT": 1, "NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
-                          {"NOT": -1, "NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
-                          {"NOT": -1, "NAND": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q2T3": {
-        "environments": [{"NOT": 1, "NAND": 1, "AND": 1, "ORN": 1, "OR": 1, "ANDN":1, "NOR": 1, "XOR": 1},
-                          {"NOT": 1, "NAND": -1, "AND": -1, "ANDN": -1, "XOR": -1, "ORN": 1, "OR": 1, "NOR": 1},
-                          {"NOT": -1, "NAND": 1, "AND": 1, "ANDN": 1, "XOR": 1, "ORN": -1, "OR": -1, "NOR": -1},
-                          {"NOT": -1, "NAND": -1, "AND": -1, "ORN": -1, "OR": -1, "ANDN":-1, "NOR": -1, "XOR": -1}],
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-
-    "Q3T0": {
+    "Q3": {
         "environments": GenQ3Envs(),
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q3T1": {
-        "environments": GenQ3Envs(),
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q3T2": {
-        "environments": GenQ3Envs(),
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
-    },
-    "Q3T3": {
-        "environments": GenQ3Envs(),
-        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR"]
+        "traits": ["NOT", "NAND", "AND", "ORN", "OR", "ANDN", "NOR", "XOR", "EQU"],
+        "final_update": 400000
     }
 }
 
@@ -132,7 +87,6 @@ def GenExpTests(treatment):
         tests += "DETAIL analysis/$t__rep_$i/final_dominant/ENV___%s/fdom_details.dat %s\n" % (env_str, GetDetArgs(treatment))
         tests += "TRACE analysis/$t__rep_$i/final_dominant/ENV___%s/trace/\n" % (env_str, )
         tests += "PRINT analysis/$t__rep_$i/final_dominant/ENV___%s/ fdom_print.gen\n" % (env_str, )
-
         # Run tests on FDOM.
         tests += "SET_BATCH 2\n"
         tests += "RECALC \n"
@@ -152,37 +106,38 @@ def main():
     """
 
     # Settings
-    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block"
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/slip_muts/iter_2"
     #cfgs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs"
-    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts"
+    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     cfgs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs"
     data_dir = os.path.join(exp_base_dir, "data")
     analysis_cfgs_dir = os.path.join(cfgs_dir, "analysis")
     exp_cfgs_dir = os.path.join(cfgs_dir, "slip_muts_configs")
     exp_analysis_script = "exp_SM_analysis.cfg"
 
-    final_update = 200000
-    start_rep = 1
-    end_rep = 50
+    mgen100_start_rep = 101
+    mgen100_end_rep = 200
+
+    mgen0_start_rep = 201
+    mgen0_end_rep = 250
 
     # Build avida commands from run list file.
     avida_args_by_treatment = {}
-    with open(os.path.join(exp_cfgs_dir, "run_list"), "r") as fp:
+    with open(os.path.join(exp_cfgs_dir, "run_list_ECAL17"), "r") as fp:
         for line in fp:
             if "./avida" in line:
                 mline = line.split(" ./avida ")
                 treatment = mline[0].split(" ")[-1].replace("__rep", "")
                 args = mline[1].strip()
                 args = args.replace("-s $seed", "")
-                args = args.replace("$seed", str(start_rep))
+                args = args.replace("$seed", str(0))
                 avida_args_by_treatment[treatment] = args
-    #print avida_args_by_treatment
-
     # Because avida commands for these runs are customized by replicate ID, I have several options:
     #  1) Pull commands directly from command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
     #  2) Pull commands from a single replicate for that treatment (rep 1).
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
-    treatments = {t.split("__")[0] for t in runs}
+    print runs
+    treatments = {"__".join(t.split("__")[:-1]) for t in runs}
     # Only include particular treatments:
     #treatments = ["Q2T1", "Q3T1", "Q4T1"]
     # print treatments
@@ -191,6 +146,10 @@ def main():
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
         # Generate analysis file.
+        q = treatment[:2]
+        start_rep = mgen100_start_rep if ("MinGen_100" in treatment) else mgen0_start_rep
+        end_rep = mgen100_end_rep if ("MinGen_100" in treatment) else mgen0_end_rep
+        final_update = treatment_info[q]["final_update"]
         content = ""
         with open(os.path.join(analysis_cfgs_dir, exp_analysis_script), "r") as fp:
             content = fp.read()
@@ -199,7 +158,7 @@ def main():
         content = content.replace("<final_update>", str(final_update))
         content = content.replace("<base_experiment_directory>", data_dir)
         content = content.replace("<treatments>", treatment)
-        content = content.replace("<exp_tests>", GenExpTests(treatment))
+        content = content.replace("<exp_tests>", GenExpTests(treatment[:2]))
         # write out temporary analysis file
         temp_acfg = os.path.join(exp_cfgs_dir, "temp_exp_analysis.cfg")
         with open(temp_acfg, "w") as fp:
@@ -210,7 +169,6 @@ def main():
         return_code = subprocess.call(cmd, shell = True, cwd = exp_cfgs_dir)
         # Clean up temporary analysis file.
         return_code = subprocess.call("rm temp_exp_analysis.cfg", shell = True, cwd = exp_cfgs_dir)
-print "Done!"
 
 if __name__ == "__main__":
     main()
