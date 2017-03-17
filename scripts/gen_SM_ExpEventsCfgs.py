@@ -48,11 +48,11 @@ def GenerateRandomlyChangingEnv(start = 50, stop = 200000, change_rate = 50, tra
 def main():
     # Some parameters:
 
-    #exp_base_dir = "/Users/amlalejini/DataPlayground/slip_muts/iter_2"
-    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
+    exp_base_dir = "/Users/amlalejini/DataPlayground/slip_muts/iter_2"
+    #exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     events_bank_dir = os.path.join(exp_base_dir, "event_bank")
-    configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/slip_muts_configs"
-    #configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs/slip_muts_configs"
+    #configs_dir = "/mnt/home/lalejini/exp_ws/plast_as_building_block/avida_configs/slip_muts_configs"
+    configs_dir = "/Users/amlalejini/devo_ws/plast_as_building_block/avida_configs/slip_muts_configs"
     mkdir_p(events_bank_dir)
 
     # For each experimental environment 'treatment':
