@@ -136,17 +136,19 @@ def main():
     #  1) Pull commands directly from command.sh file for each run. This means I'll run avida analyze mode 1 rep at a time.
     #  2) Pull commands from a single replicate for that treatment (rep 1).
     runs = [d for d in os.listdir(data_dir) if "__rep_" in d]
-    print runs
+    #print runs
     treatments = {"__".join(t.split("__")[:-1]) for t in runs}
     # Only include particular treatments:
     #treatments = ["Q2T1", "Q3T1", "Q4T1"]
     # print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
-    #print treatments
+    print treatments
+    skip_questions = ["Q3"]
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
         # Generate analysis file.
         q = treatment[:2]
+        if q in skip_questions: continue
         start_rep = mgen100_start_rep if ("MinGen_100" in treatment) else mgen0_start_rep
         end_rep = mgen100_end_rep if ("MinGen_100" in treatment) else mgen0_end_rep
         final_update = treatment_info[q]["final_update"]
