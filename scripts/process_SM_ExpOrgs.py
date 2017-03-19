@@ -82,7 +82,7 @@ def main():
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
-    treatment_set = {t.split("__")[0] for t in runs}
+    treatment_set = {"__".join(t.split("__")[:-1]) for t in runs}
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
     data_content = [["treatment", "question", "rep_id", "fdom_env_count", "fdom_phenotype_score",

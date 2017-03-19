@@ -26,6 +26,29 @@ def NormalizePhenotypeScore(score, max_score):
     """
     return float(score) / float(max_score) * 100
 
+def AnalyzeOrgSimple(org_details, env_details, skip_traits = []):
+    """
+    Given seed details dictionary and environment details dictionary, calculate max possible phenotype
+    score and achieved phenotype score.
+    Phenotype score:
+        * False positives (expressing punished trait): -1
+        * True positives (expressing rewarded trait): +1
+    Max score:
+        * Sum of total number of traits in environment
+    """
+    max_phen_score = len(env_details) - len(skip_traits)
+    phenotype_score = 0
+    for trait in env_details:
+        if trait in skip_traits: continue
+        trait_name = trait_map[trait].lower()
+        expression = org_details[trait_name]
+        if expression == "1" and env_details[trait] == "1":     # True positive (+1)
+            phenotype_score += 1
+        elif expression == "1" and env_details[trait] == "-1":  # False positive (-1)
+            phenotype_score -= 1
+    return {"max_score": max_phen_score, "score": phenotype_score}
+
+
 def AnalyzeOrg(org_details, env_details, skip_traits = []):
     """
     Given seed details dictionary and environment details dictionary, calculate max possible phenotype
@@ -65,9 +88,9 @@ def GetEnvIndAttr(attr_key, org_by_env):
 def main():
     # Some relevant parameters.
     #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/iter_1"
-    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts"
+    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
-    lin_ts_fname = "SM_lineage_score_ts.csv"
+    lin_ts_fname = "SM_q1q2_lineage_score_ts.csv"
     final_update = 200000
     # Score time series data
     score_ts_content = ",".join(["update", "treatment", "question", "rep", "score"]) + "\n"
@@ -77,11 +100,13 @@ def main():
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
-    treatment_set = {t.split("__")[0] for t in runs}
+    treatment_set = {"__".join(t.split("__")[:-1]) for t in runs}
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
+    skip_qs = ["Q3"]
     for treatment in treatments:
-        if treatment in skip: continue
+        q = treatment[:2]
+        if q in skip_qs: continue
         print "Processing treatment: %s" % treatment
         for run in treatments[treatment]:
             print "  Processing run: %s" % run
