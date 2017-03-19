@@ -53,20 +53,44 @@ def AnalyzeOrg(org_details, env_details, skip_traits = []):
             exit(-1)
     return {"max_score": max_phen_score, "score": phenotype_score}
 
+def AnalyzeOrgSimple(org_details, env_details, skip_traits = []):
+    """
+    Given seed details dictionary and environment details dictionary, calculate max possible phenotype
+    score and achieved phenotype score.
+    Phenotype score:
+        * False positives (expressing punished trait): -1
+        * True positives (expressing rewarded trait): +1
+    Max score:
+        * Sum of total number of traits in environment
+    """
+    max_phen_score = len(env_details) - len(skip_traits)
+    phenotype_score = 0
+    for trait in env_details:
+        if trait in skip_traits: continue
+        trait_name = trait_map[trait].lower()
+        expression = org_details[trait_name]
+        if expression == "1" and env_details[trait] == "1":     # True positive (+1)
+            phenotype_score += 1
+        elif expression == "1" and env_details[trait] == "-1":  # False positive (-1)
+            phenotype_score -= 1
+    return {"max_score": max_phen_score, "score": phenotype_score}
+
 def main():
     # Some relevant parameters.
-    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts"
+    exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
     # Get all relevant runs.
     runs = [d for d in os.listdir(evorgs_dir) if "__rep_" in d]
     # From runs, resolve what treatments we have.
     treatment_set = {t.split("__")[0] for t in runs}
     # Organize runs by treatment.
-    treatment_set = ["Q1T0", "Q1T1", "Q1T2", "Q1T3"]
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
     data_content = [["treatment", "question", "rep_id", "fdom_env_count", "fdom_phenotype_score",
                     "fdom_max_phenotype_score", "fdom_norm_phenotype_score"]]
+    skip_qs = ["Q3"]
     for treatment in treatments:
+        q = treatment[:2]
+        if q in skip_qs: continue
         print "Processing treatment: %s" % treatment
         for run in treatments[treatment]:
             print "  Processing run: %s" % run
@@ -87,7 +111,11 @@ def main():
                 fdom_dets = ParseDetailFile(os.path.join(env_dir, "fdom_details.dat"))[0]
                 # 3) Analyze fdom organism in the environment.
                 #skip_traits = ["NAND", "NOT", "EQU"] if not "Q1" in treatment else []
-                analysis = AnalyzeOrg(fdom_dets, env_dets)
+                analysis = None
+                if q == "Q1":
+                    analysis = AnalyzeOrgSimple(fdom_dets, env_dets)
+                else:
+                    analysis = AnalyzeOrg(fdom_dets, env_dets)
                 fdom_phen_mscore += analysis["max_score"]
                 fdom_phen_score += analysis["score"]
             # Aggregate data for this run.
@@ -107,7 +135,7 @@ def main():
             print "    Fdom norm score: " + str(NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore))
     print data_content
     # Write out data content to file.
-    with open("iter2_fdom_200k.data", "w") as fp:
+    with open("slipmuts_q1q2_iter2_fdom_200k.data", "w") as fp:
         fp.write("\n".join([",".join(line) for line in data_content]))
 
 if __name__ == "__main__":

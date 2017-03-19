@@ -143,6 +143,7 @@ def main():
     # print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     print treatments
+    finished_treatments = ["Q3__Slip_DUP__MinGen_0"]
     skip_questions = ["Q3"]
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
