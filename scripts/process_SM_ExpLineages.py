@@ -148,7 +148,12 @@ def main():
                     # Get environment details.
                     env_dets = ExtractEnvDetails(env)
                     # Analyze organism in this environment.
-                    analysis = AnalyzeOrg(org_by_env[env], env_dets)
+                    analysis = None
+                    if q == "Q1":
+                        analysis = AnalyzeOrgSimple(org_by_env[env], env_dets)
+                    else:
+                        analysis = AnalyzeOrg(org_by_env[env], env_dets)
+
                     org_phen_score += analysis["score"]
                     org_phen_score_max += analysis["max_score"]
 
