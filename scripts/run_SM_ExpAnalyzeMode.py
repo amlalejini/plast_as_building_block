@@ -143,13 +143,14 @@ def main():
     # print treatments
     treatments = {t:[r for r in runs if t in r] for t in treatments}
     print treatments
-    finished_treatments = ["Q3__Slip_DUP__MinGen_0"]
-    skip_questions = ["Q3"]
+    finished_treatments = ["Q3__Slip_DUP__MinGen_0", "Q3__Slip_SCRAM__MinGen_0", "Q3__Slip_NOP__MinGen_100"]
+    # Q3 slip slip nop mgen 100: 101-155 done
+    skip_questions = ["Q1", "Q2"]
     for treatment in treatments:
         print "Analyzing treatment: %s" % treatment
         # Generate analysis file.
         q = treatment[:2]
-        if q in skip_questions: continue
+        if q in skip_questions or treatment in finished_treatments: continue
         start_rep = mgen100_start_rep if ("MinGen_100" in treatment) else mgen0_start_rep
         end_rep = mgen100_end_rep if ("MinGen_100" in treatment) else mgen0_end_rep
         final_update = treatment_info[q]["final_update"]
