@@ -86,7 +86,8 @@ def main():
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
     data_content = [["treatment", "question", "rep_id", "fdom_env_count", "fdom_phenotype_score",
-                    "fdom_max_phenotype_score", "fdom_norm_phenotype_score"]]
+                    "fdom_max_phenotype_score", "fdom_norm_phenotype_score",
+                    "fdom_gestation_time", "fdom_genome_length"]]
     skip_qs = ["Q3"]
     for treatment in treatments:
         q = treatment[:2]
@@ -103,6 +104,8 @@ def main():
             fdom_envs = [e for e in os.listdir(fdom_dir) if "ENV___" in e] # Extract fdom environments.
             fdom_phen_score = 0
             fdom_phen_mscore = 0
+            fdom_total_gest_time = 0
+            fdom_total_genome_len = 0
             for env in fdom_envs:
                 env_dir = os.path.join(fdom_dir, env)
                 # 1) Extract environment characteristics.
@@ -118,6 +121,8 @@ def main():
                     analysis = AnalyzeOrg(fdom_dets, env_dets)
                 fdom_phen_mscore += analysis["max_score"]
                 fdom_phen_score += analysis["score"]
+                fdom_total_gest_time += float(fdom_dets["gestation time"])
+                fdom_total_genome_len += float(fdom_dets["genome length"])
             # Aggregate data for this run.
             run_data = {"treatment": treatment,
                         "question": treatment[:2],
@@ -126,6 +131,8 @@ def main():
                         "fdom_phenotype_score": fdom_phen_score,
                         "fdom_max_phenotype_score": fdom_phen_mscore,
                         "fdom_norm_phenotype_score": NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore),
+                        "fdom_gestation_time": fdom_total_gest_time / float(len(fdom_envs)),
+                        "fdom_genome_length": fdom_total_genome_len / float(len(fdom_envs))
                     }
             # Order and append data to content list
             data_content.append([str(run_data[attr]) for attr in data_content[0]])
