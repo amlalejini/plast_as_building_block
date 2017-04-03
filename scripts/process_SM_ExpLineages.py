@@ -10,8 +10,9 @@ Output data files:
         * replicate,
 """
 
-import os
+import os, gc
 from utilities.ParseAvidaOutput import ParseDetailFile
+from utilities.utilities import mkdir_p
 
 trait_map = {"NOT": "Not", "NAND": "Nand", "AND": "And", "ORN": "OrNot", "OR": "Or",
              "ANDN": "AndNot", "NOR": "Nor", "XOR": "Xor", "EQU": "Equals"}
@@ -91,10 +92,12 @@ def main():
     exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
     lin_ts_fname = "SM_q3_lineage_score_ts.csv"
+    dest = "proc_lins"
     final_update = 200000
     # Score time series data
     score_ts_content = ",".join(["update", "treatment", "question", "rep", "score"]) + "\n"
-    with open(lin_ts_fname, "w") as fp:
+    mkdir_p(dest)
+    with open(os.path.join(dest, "head__" + lin_ts_fname), "w") as fp:
         fp.write(score_ts_content)
     score_ts_content = ""
     # Get all relevant runs.
@@ -204,9 +207,10 @@ def main():
             # assert(len(max_score) == 1)
             # max_score = list(max_score)[0]
             # Clean up some memory
-            # full_score_seq = None
-            # full_start_updates = None
-            # full_duration_updates = None
+            full_score_seq = None
+            full_start_updates = None
+            full_duration_updates = None
+            gc.collect()
             # # Sample rate:
             # samp_rate = 50
             # #sampled_score_ts = {s:score_time_series[s] for s in range(0, final_update + 1, samp_rate) if s < len(score_time_series)}
@@ -215,7 +219,7 @@ def main():
             # score_time_series = None
 
             # Output content so far.
-            with open(lin_ts_fname, "a") as fp:
+            with open(os.path.join(dest, run + "__" + lin_ts_fname), "a") as fp:
                 fp.write(score_ts_content)
             score_ts_content = ""
 
