@@ -90,7 +90,7 @@ def main():
     #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/iter_1"
     exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
-    lin_ts_fname = "SM_q1q2_lineage_score_ts.csv"
+    lin_ts_fname = "SM_q3_lineage_score_ts.csv"
     final_update = 200000
     # Score time series data
     score_ts_content = ",".join(["update", "treatment", "question", "rep", "score"]) + "\n"
@@ -103,11 +103,18 @@ def main():
     treatment_set = {"__".join(t.split("__")[:-1]) for t in runs}
     # Organize runs by treatment.
     treatments = {t:[r for r in runs if t in r] for t in treatment_set}
-    skip_qs = ["Q3"]
+    skip_qs = ["Q1", "Q2"]
     for treatment in treatments:
         q = treatment[:2]
         if q in skip_qs: continue
         print "Processing treatment: %s" % treatment
+        if q == "Q1" or q == "Q2":
+            final_update = 200000
+        elif q == "Q3":
+            final_update = 400000
+        else:
+            print "Unknown question!"
+            exit(-1)
         for run in treatments[treatment]:
             print "  Processing run: %s" % run
             run_dir = os.path.join(evorgs_dir, run)
