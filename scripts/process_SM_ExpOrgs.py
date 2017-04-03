@@ -88,7 +88,7 @@ def main():
     data_content = [["treatment", "question", "rep_id", "fdom_env_count", "fdom_phenotype_score",
                     "fdom_max_phenotype_score", "fdom_norm_phenotype_score",
                     "fdom_gestation_time", "fdom_genome_length"]]
-    skip_qs = ["Q3"]
+    skip_qs = []
     for treatment in treatments:
         q = treatment[:2]
         if q in skip_qs: continue
@@ -142,7 +142,7 @@ def main():
             print "    Fdom norm score: " + str(NormalizePhenotypeScore(fdom_phen_score, fdom_phen_mscore))
     print data_content
     # Write out data content to file.
-    with open("slipmuts_q1q2_iter2_fdom_200k.data", "w") as fp:
+    with open("slipmuts_iter2_fdom_200k.data", "w") as fp:
         fp.write("\n".join([",".join(line) for line in data_content]))
 
 if __name__ == "__main__":

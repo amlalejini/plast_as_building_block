@@ -130,3 +130,27 @@ To answer each of the above questions, digital organisms are evolved in a seed, 
     * Pre-generated, randomly changing environments (overlaid on top of NAND/NOT)
   * Division of labor (via task-switching costs)
   * Division of labor (via mutually exclusive tasks)
+
+
+### Data Guide:
+ * Q1: Runs with a static, logic 9 environment
+ * Q2: Runs with a randomly changing environment (tasks: NAND, NOT, ORN, AND)
+ * Q3: Runs with a randomly changing environment (tasks: logic 9)
+
+* Note, no data for Q3 is in this file.
+
+Headers:
+  * rep_id: run identification string (unique for each line in file)
+  * fdom_phenotype_score: score for final dominant organism. Note, for Q1 this is a trait count, and for Q2 and Q3 the score is based on false/true positives/negatives.
+  * -1000_phenotype_score: score for final dominant ancestor @ 1000 updates prior to the end of the experiment. For Q1 and Q2, this will be update 199000. For Q3, this will be update 399000.
+  * min_genome_size: Min genome size parameter used for this run.
+
+By-treatment information
+* Slip_DUP -- If a duplication would occur, actually duplicate what should be duplicated.
+* Slip_SCRAM -- If a duplication would occur, insert a scrambled duplicated sequence.
+* Slip_RAND -- If a duplication would occur, instead of duplicating, insert an equivalently sized sequence of random instructions.
+* Slip_NOP -- If a duplication would occur, instead of duplicating, insert an equivalently sized sequence of nop-x instructions.  
+* Slip_SCATTER -- If a duplication would occur, instead of duplicating, insert a number of random instructions into random locations of the genome that would be equal to the size of the would-be duplication. Same for deletions (but deleting instead of inserting).
+
+* Slip_NONE -- Baseline condition (slip mutations turned off, normal mutation rate)
+* HIGHMUT -- Slip mutations turned off, per-site copy and deletion mutations cranked up.

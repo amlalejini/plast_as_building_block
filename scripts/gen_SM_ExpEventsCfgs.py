@@ -56,8 +56,8 @@ def main():
     mkdir_p(events_bank_dir)
 
     # For each experimental environment 'treatment':
-    rep_start = 101
-    rep_end = 250
+    rep_start = 301
+    rep_end = 400
     for exp in exps:
         print "Exp: " + str(exp)
         # Make an events file that transfers this seed_rep's organism to an experimental environment.
