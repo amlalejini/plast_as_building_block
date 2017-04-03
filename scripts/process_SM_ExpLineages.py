@@ -87,7 +87,7 @@ def GetEnvIndAttr(attr_key, org_by_env):
 
 def main():
     # Some relevant parameters.
-    #exp_base_dir = "/Users/amlalejini/DataPlayground/plast_as_building_block/iter_1"
+    #exp_base_dir = "/Users/amlalejini/DataPlayground/slip_muts/iter_2"
     exp_base_dir = "/mnt/home/lalejini/Data/slip_muts/iter_2"
     evorgs_dir = os.path.join(exp_base_dir, "analysis")
     lin_ts_fname = "SM_q3_lineage_score_ts.csv"
@@ -181,30 +181,39 @@ def main():
 
 
             sample_range = final_update
+            sample_rate = 100
+            cur_seq = 0
+            cur_range = (full_start_updates[cur_seq], full_start_updates[cur_seq] + full_duration_updates[cur_seq])
+            for cur_update in range(0, sample_range + 1, sample_rate):
+                # Is current update in cur_seq? If not, find current seq for this sample.
+                while (cur_update < cur_range[0]) or (cur_update > cur_range[1]):
+                    cur_seq += 1
+                    cur_range = (full_start_updates[cur_seq], full_start_updates[cur_seq] + full_duration_updates[cur_seq])
+                # We're at the correct location, appent it to score ts content.
+                score_ts_content += ",".join([str(cur_update), treatment, treatment[:2], run, str(full_score_seq[cur_seq])]) + "\n"
 
-            # Expand scores (1 per upate)
-            score_time_series = [-1 for u in range(0, final_update + 1)]
-            for k in range(0, len(full_score_seq)):
-                start = full_start_updates[k]
-                if start > sample_range: break
-                dur = full_duration_updates[k]
-                score = full_score_seq[k]
-                for j in range(start, start + dur):
-                    score_time_series[j] = score
-            assert(len(max_score) == 1)
-            max_score = list(max_score)[0]
-
+            # # Expand scores (1 per upate)
+            # score_time_series = [-1 for u in range(0, final_update + 1)]
+            # for k in range(0, len(full_score_seq)):
+            #     start = full_start_updates[k]
+            #     if start > sample_range: break
+            #     dur = full_duration_updates[k]
+            #     score = full_score_seq[k]
+            #     for j in range(start, start + dur):
+            #         score_time_series[j] = score
+            # assert(len(max_score) == 1)
+            # max_score = list(max_score)[0]
             # Clean up some memory
-            full_score_seq = None
-            full_start_updates = None
-            full_duration_updates = None
+            # full_score_seq = None
+            # full_start_updates = None
+            # full_duration_updates = None
+            # # Sample rate:
+            # samp_rate = 50
+            # #sampled_score_ts = {s:score_time_series[s] for s in range(0, final_update + 1, samp_rate) if s < len(score_time_series)}
+            # for t in range(0, sample_range, samp_rate):
+            #     score_ts_content += ",".join([str(t), treatment, treatment[:2], run, str(score_time_series[t])]) + "\n"
+            # score_time_series = None
 
-            # Sample rate:
-            samp_rate = 50
-            #sampled_score_ts = {s:score_time_series[s] for s in range(0, final_update + 1, samp_rate) if s < len(score_time_series)}
-            for t in range(0, sample_range, samp_rate):
-                score_ts_content += ",".join([str(t), treatment, treatment[:2], run, str(score_time_series[t])]) + "\n"
-            score_time_series = None
             # Output content so far.
             with open(lin_ts_fname, "a") as fp:
                 fp.write(score_ts_content)
